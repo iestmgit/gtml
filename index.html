@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <!-- ============================================ -->
+    <!--  بخش 1: سرآیند (Head) - اطلاعات پشت‌صحنه     -->
+    <!-- ============================================ -->
+    
+    <!-- 1-1. نوع کاراکترها (UTF-8 برای پشتیبانی از فارسی) -->
+    <meta charset="UTF-8">
+    
+    <!-- 1-2. تنظیم نمایش در موبایل (ریسپانسیو) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 1-3. عنوان صفحه (توی تب مرورگر نشون داده میشه) -->
+    <title>آموزش جامع IESTM - برنامه‌نویسی وب</title>
+    
+    <!-- 1-4. توضیحات برای موتورهای جستجو (SEO) -->
+    <meta name="description" content="وب‌سایت آموزشی برای یادگیری HTML, CSS و JavaScript با مثال واقعی از IESTM">
+    
+    <!-- ============================================ -->
+    <!--  بخش 2: استایل‌های CSS (ظاهر و زیبایی)        -->
+    <!-- ============================================ -->
+    <style>
+        /* --------------------------------------------
+           2-1. تنظیمات سراسری (همه‌ی تگ‌ها)
+        -------------------------------------------- */
+        * {
+            margin: 0;                 /* حذف فاصله‌ی پیش‌فرض بیرونی */
+            padding: 0;                /* حذف فاصله‌ی پیش‌فرض داخلی */
+            box-sizing: border-box;    /* محاسبه‌ی عرض و ارتفاع با احتساب حاشیه و پدینگ */
+            font-family: 'Segoe UI', Tahoma, sans-serif;  /* قلم یکدست */
+        }
+        
+        /* --------------------------------------------
+           2-2. بدنه‌ی اصلی صفحه
+        -------------------------------------------- */
+        body {
+            background: #f0f4f8;       /* رنگ پس‌زمینه‌ی کل صفحه */
+            color: #1a202c;            /* رنگ اصلی متن (تیره) */
+            display: flex;             /* فعال کردن چیدمان انعطاف‌پذیر */
+            flex-direction: column;    /* چیدن عناصر به صورت عمودی */
+            align-items: center;       /* وسط‌چین کردن افقی */
+            min-height: 100vh;         /* حداقل ارتفاع برابر با کل صفحه‌نمایش */
+            padding: 20px;             /* فاصله‌ی داخلی از لبه‌های صفحه */
+        }
+        
+        /* --------------------------------------------
+           2-3. کانتینر اصلی (جعبه‌ی سفید وسط صفحه)
+        -------------------------------------------- */
+        .container {
+            max-width: 1000px;         /* حداکثر عرض جعبه */
+            width: 100%;              /* در صفحه‌های کوچک، کل عرض رو بگیره */
+            background: white;         /* پس‌زمینه‌ی سفید */
+            border-radius: 20px;       /* گوشه‌های گرد */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);  /* سایه‌ی ملایم */
+            padding: 30px;            /* فاصله‌ی داخلی جعبه */
+        }
+        
+        /* --------------------------------------------
+           2-4. هدر سایت (شامل لوگو و منو)
+        -------------------------------------------- */
+        .header {
+            display: flex;             /* چیدمان افقی برای لوگو و منو */
+            justify-content: space-between;  /* لوگو چپ، منو راست */
+            align-items: center;       /* وسط‌چین عمودی */
+            border-bottom: 3px solid #e2e8f0;  /* خط جداکننده‌ی زیر هدر */
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2b6cb0;
+        }
+        .logo span {
+            color: #f6ad55;           /* رنگ نارنجی برای بخشی از لوگو */
+        }
+        .menu a {
+            text-decoration: none;     /* حذف خط زیر لینک‌ها */
+            color: #4a5568;
+            margin-right: 20px;       /* فاصله‌ی بین آیتم‌های منو */
+            font-weight: 500;
+            transition: color 0.2s;   /* انیمیشن نرم برای تغییر رنگ */
+        }
+        .menu a:hover {
+            color: #2b6cb0;           /* وقتی موس میره روش، آبی میشه */
+        }
+        
+        /* --------------------------------------------
+           2-5. بخش محتوای اصلی (معرفی IESTM)
+        -------------------------------------------- */
+        .hero {
+            text-align: center;       /* متن‌ها وسط‌چین */
+            padding: 20px 0 30px 0;
+        }
+        .hero h1 {
+            font-size: 36px;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+        .hero h1 small {
+            font-size: 20px;
+            color: #718096;
+            display: block;           /* رفتن به خط بعدی */
+            margin-top: 6px;
+            font-weight: 400;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto 20px auto; /* وسط‌چین کردن خودکار */
+            line-height: 1.8;         /* فاصله‌ی بین خطوط */
+        }
+        .btn {
+            background: #2b6cb0;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;          /* تغییر شکل موس به دست */
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #1a4f7a;      /* تیره‌تر شدن در حالت هاور */
+            transform: scale(1.03);   /* کمی بزرگتر شدن */
+            box-shadow: 0 6px 14px rgba(43,108,176,0.3);
+        }
+        
+        /* --------------------------------------------
+           2-6. بخش محصولات (با کارت‌های سه‌تایی)
+        -------------------------------------------- */
+        .products {
+            display: grid;            /* چیدمان شبکه‌ای */
+            grid-template-columns: repeat(3, 1fr);  /* ۳ ستون مساوی */
+            gap: 20px;               /* فاصله‌ی بین کارت‌ها */
+            margin: 30px 0;
+        }
+        .card {
+            background: #f7fafc;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            transition: 0.2s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-5px); /* بلند شدن کارت در هاور */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            border-color: #2b6cb0;
+        }
+        .card h3 {
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        .card p {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .card .icon {
+            font-size: 40px;
+            display: block;          /* آیکون رو به خط بعد ببر */
+            margin-bottom: 8px;
+        }
+        
+        /* --------------------------------------------
+           2-7. بخش تعاملی با جاوااسکریپت (نمایش پیام)
+        -------------------------------------------- */
+        .interactive {
+            background: #edf2f7;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0 10px 0;
+            text-align: center;
+        }
+        .interactive p {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 12px;
+        }
+        #messageBox {
+            background: #e2e8f0;
+            padding: 12px;
+            border-radius: 10px;
+            color: #2d3748;
+            font-weight: 500;
+            min-height: 50px;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        /* استایل پیام موفق (با جاوااسکریپت اضافه میشه) */
+        .success-msg {
+            background: #48bb78 !important;
+            color: white !important;
+        }
+        
+        /* --------------------------------------------
+           2-8. فوتر (پایین صفحه)
+        -------------------------------------------- */
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+        
+        /* --------------------------------------------
+           2-9. تنظیمات ریسپانسیو (برای موبایل)
+        -------------------------------------------- */
+        @media (max-width: 700px) {
+            .products {
+                grid-template-columns: 1fr;  /* توی موبایل هر کارت یه خط کامل */
+            }
+            .header {
+                flex-direction: column;      /* لوگو و منو عمودی میشن */
+                gap: 10px;
+            }
+            .menu a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+            .hero h1 {
+                font-size: 26px;
+            }
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!--  بخش 3: بدنه (Body) - محتوای قابل مشاهده      -->
+    <!-- ============================================ -->
+    <div class="container">
+        
+        <!-- 3-1. هدر -->
+        <header class="header">
+            <div class="logo">IESTM <span>›</span></div>
+            <nav class="menu">
+                <a href="#">خانه</a>
+                <a href="#">محصولات</a>
+                <a href="#">آموزش</a>
+                <a href="#">تماس</a>
+            </nav>
+        </header>
+        
+        <!-- 3-2. بخش اصلی (معرفی) -->
+        <section class="hero">
+            <h1>
+                🚀 IESTM
+                <small>پلتفرم نوآوری دیجیتال</small>
+            </h1>
+            <p>
+                ایستم به شما کمک می‌کند تا ایده‌های خود را با استفاده از 
+                <strong>HTML، CSS و جاوااسکریپت</strong> به واقعیت تبدیل کنید.
+                این صفحه یک نمونه‌ی کامل آموزشی است.
+            </p>
+            <!-- دکمه‌ای که با جاوااسکریپت کار می‌کنه (پایین صفحه) -->
+            <button class="btn" onclick="showWelcome()">✨ شروع کنید</button>
+        </section>
+        
+        <!-- 3-3. بخش محصولات (۳ کارت) -->
+        <section class="products">
+            <div class="card">
+                <span class="icon">📱</span>
+                <h3>اپلیکیشن موبایل</h3>
+                <p>نسخه‌ی اندروید و iOS برای ارتباط با سرویس‌های IESTM</p>
+            </div>
+            <div class="card">
+                <span class="icon">🌐</span>
+                <h3>سازنده وب‌سایت</h3>
+                <p>ابزار GTML برای ساخت صفحات وب بدون نوشتن کد</p>
+            </div>
+            <div class="card">
+                <span class="icon">🎮</span>
+                <h3>بازی‌های سه‌بعدی</h3>
+                <p>محیط تعاملی با Three.js برای تجربه‌های بصری</p>
+            </div>
+        </section>
+        
+        <!-- 3-4. بخش تعاملی (جاوااسکریپت زنده) -->
+        <section class="interactive">
+            <p>👆 روی دکمه‌ی زیر کلیک کن تا پیام خوش‌آمدگویی ببینی</p>
+            <button class="btn" onclick="showMessage()">سلام کن!</button>
+            <div id="messageBox">منتظر کلیک شما هستم...</div>
+        </section>
+        
+        <!-- 3-5. فوتر -->
+        <footer class="footer">
+            © ۲۰۲۶ IESTM - تمامی حقوق محفوظ است.
+            <br>
+            <span style="font-size:12px; color:#cbd5e0;">
+                این صفحه برای آموزش برنامه‌نویسی وب طراحی شده است.
+            </span>
+        </footer>
+        
+    </div>
+
+    <!-- ============================================ -->
+    <!--  بخش 4: جاوااسکریپت (رفتار و تعامل)           -->
+    <!-- ============================================ -->
+    <script>
+        // ----------------------------------------------
+        //  4-1. تابع نمایش پیام در بخش interactive
+        // ----------------------------------------------
+        function showMessage() {
+            // این خط، المان div با id="messageBox" رو پیدا می‌کنه
+            const box = document.getElementById('messageBox');
+            
+            // تغییر متن داخل اون المان
+            box.textContent = '🎉 سلام! خوش آمدی به دنیای برنامه‌نویسی وب!';
+            
+            // اضافه کردن یک کلاس CSS برای تغییر رنگ پس‌زمینه
+            box.classList.add('success-msg');
+            
+            // بعد از ۳ ثانیه، پیام رو به حالت اول برگردون (اختیاری)
+            setTimeout(() => {
+                box.textContent = 'منتظر کلیک شما هستم...';
+                box.classList.remove('success-msg');
+            }, 5000);  // ۵۰۰۰ میلی‌ثانیه = ۵ ثانیه
+        }
+        
+        // ----------------------------------------------
+        //  4-2. تابع برای دکمه‌ی "شروع کنید" در هدر
+        // ----------------------------------------------
+        function showWelcome() {
+            // نمایش یک پنجره‌ی هشدار ساده
+            alert('👋 به خانواده‌ی IESTM خوش آمدی!');
+            
+            // همچنین می‌تونیم محتوای بخش hero رو تغییر بدیم
+            const heroTitle = document.querySelector('.hero h1');
+            heroTitle.innerHTML = '✅ قدم اول رو برداشتی! <small>حالا کدها رو بررسی کن</small>';
+        }
+        
+        // ----------------------------------------------
+        //  4-3. پیام در کنسول مرورگر (برای توسعه‌دهندگان)
+        // ----------------------------------------------
+        console.log('🔥 این صفحه برای آموزش کامل HTML, CSS, JS ساخته شده است.');
+        console.log('💡 برای دیدن ساختار، برگه‌ی Elements رو باز کن.');
+    </script>
+
+</body>
+</html>
